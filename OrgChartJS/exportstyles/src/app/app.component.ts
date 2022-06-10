@@ -4,10 +4,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'exportstyles';
+
   constructor() { }
 
   ngOnInit() {
@@ -42,19 +43,16 @@ export class AppComponent {
                   newNode.img = node.img;
                   newNode.tags = ["HR"];
                   nodes[i] = newNode;
-                  console.log(nodes);
               }
           }
 
           chart.on('exportstart', function (sender, args) {
               args.styles += '<link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet">';
-              let style = document.getElementById('myStyles');
-              if (style) {
-                  args.styles += style.outerHTML;
-              }
+              args.styles += `<style id="myStyles"> .node {font-family: 'Gochi Hand';} .node.HR > rect {fill: #E99113 !important;}`;
           });
           
           chart.load(nodes);
       }
   }
 }
+
